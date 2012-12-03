@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <script src="../p.js"></script>
+    </head>
+    <body>
+        <script type="application/processing">
+            int r = 300;
+
+            void setup() {
+              size( 900, 900 );
+              smooth();
+            }
+
+            void draw() {
+              // background color
+              background( 254, 219, 154 );
+              
+              // smallest circle
+              noFill();
+              strokeWeight( 2 );
+              stroke( 255, 255, 255, 255 );
+              ellipse( width/2, height/2, 400, 400 );
+              
+              // middle circle largest circle
+              stroke( 255, 255, 255, 100 );
+              ellipse( width/2, height/2, 500, 500 );
+              ellipse( width/2, height/2, 600, 600 );
+              
+              pushMatrix();
+                // translate to center
+                translate( width/2, height/2 );
+                
+                // take time measuremnt
+                float t = millis()/5000.0f;
+                
+                // draw along the largest circle
+                float x = (r*cos(t));
+                float y = (r*sin(t));
+                
+                //draw circle
+                stroke( 0, 0, 0 );
+                fill( 247, 144, 88 );
+                noStroke();
+                ellipse( x, y, 20, 20 );
+                
+                // draw ring around orbiting circle
+                noFill();
+                stroke( 255, 255, 255, 100 );
+                ellipse( x, y, 60, 60 );
+                
+                //draw orbiting white circle
+                pushMatrix();
+                  translate( x, y );
+                  
+                  t = millis()/1000.0f;
+                  x = (30*cos(t));
+                  y = (30*sin(t));
+                  noStroke();
+                  fill( 255, 255, 255 );
+                  ellipse( x, y, 10, 10 );
+                popMatrix();
+                
+                //draw slower white circle
+                t = millis()/10000.0f;
+                // draw along the largest circle
+                x = (r*cos(t));
+                y = (r*sin(t));
+                noStroke();
+                fill( 255, 255, 255 );
+                ellipse( x, y, 25, 25 );
+                
+                noFill();
+                stroke( 255, 255, 255, 100 );
+                ellipse( x, y, 150, 150 );
+                pushMatrix();
+                  translate( x, y );
+                  t = millis()/800.0f;
+                  x = (75*cos(t));
+                  y = (75*sin(t));
+                  noStroke();
+                  fill( 247, 144, 88 );
+                  ellipse( x, y, 15, 15 );
+                  noFill();
+                  stroke( 255, 255, 255 );
+                  ellipse( x, y, 70, 70 );
+                  pushMatrix();
+                    translate( x, y );
+                    noStroke();
+                    fill( 255, 255, 255 );
+                    t = millis()/200.0f;
+                    x = (35*sin(t));
+                    y = (35*cos(t));
+                    ellipse( x, y, 10, 10 );       
+                  popMatrix();
+                popMatrix();
+              popMatrix();
+            }
+        </script>
+        <canvas width="200" height="200"></canvas>
+    </body>
+</html>
